@@ -78,7 +78,7 @@ const DeleteBoard = ({ delDropId, delToDos }: IDeletePorps) => {
     <Wrapper>
       <Title>{delDropId}</Title>
       {/* 아래에서 드롭할 아이디를 지정해준다 */}
-      <Droppable droppableId="deleteList">
+      <Droppable droppableId="deleteList" type="word">
         {(provided, snapshot) => (
           <Area
             isDraggingOver={snapshot.isDraggingOver}

@@ -33,7 +33,7 @@ interface IAreaProps {
 const Area = styled.div<IAreaProps>`
   background-color: ${(props) =>
     props.isDraggingOver
-      ? "#dfe6e9"
+      ? "#e9dfe5"
       : props.isDraggingFromThis
       ? "#b2bec3"
       : "transparent"};
@@ -80,7 +80,10 @@ const Board = ({ toDos, boardId }: IBoardProps) => {
     setToDos((allBoards) => {
       return {
         ...allBoards,
-        [boardId]: [newToDo, ...allBoards[boardId]],
+        [boardId]: {
+          ...allBoards[boardId],
+          list: [newToDo, ...allBoards[boardId].list],
+        },
       };
     });
     setValue("toDo", "");
@@ -92,7 +95,10 @@ const Board = ({ toDos, boardId }: IBoardProps) => {
     setToDos((allBoards) => {
       return {
         ...allBoards,
-        [boardId]: allBoards[boardId].filter((item) => item.id !== toDoId),
+        [boardId]: {
+          ...allBoards[boardId],
+          list: allBoards[boardId].list.filter((item) => item.id !== toDoId),
+        },
       };
     });
   }, []);
@@ -107,7 +113,7 @@ const Board = ({ toDos, boardId }: IBoardProps) => {
           placeholder={`Add task on ${boardId}`}
         />
       </Form>
-      <Droppable droppableId={boardId}>
+      <Droppable droppableId={boardId} type="word">
         {(magic, info) => (
           <Area
             isDraggingOver={info.isDraggingOver}

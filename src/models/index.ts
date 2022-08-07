@@ -4,7 +4,10 @@ export interface ITodo {
 }
 
 export interface IToDoState {
-  [key: string]: ITodo[];
+  [key: string]: {
+    index: number;
+    list: ITodo[];
+  };
 }
 
 export interface IDeleteObj {
